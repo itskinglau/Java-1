@@ -1,0 +1,8 @@
+Email Security<>Cathy Liu<>10
+Email Security<>Jose Gonzales<>10
+Windows update<>Paul Hansen<>35
+Windows update<>Cathy Liu<>25
+Windows update<>Jose Gonzales<>10
+Wireless setup<>Michael O'Connor<>10
+Wireless setup<>Jose Gonzales<>50
+Wireless setup<>Paul Hansen<>20
