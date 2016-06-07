@@ -1,0 +1,6 @@
+StartLocation,2,0,0
+Artifact,fountain,0,0,0
+Artifact,exam,1,1,0
+Artifact,lunch,2,1,0
+Artifact,picture,2,0,0
+Inventory,paper
