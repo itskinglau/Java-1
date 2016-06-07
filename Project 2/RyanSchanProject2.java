@@ -21,7 +21,7 @@ public class Project1V2
 
 		// Print the date and time
 
-		System.out.println("	Southwest Power & Light");
+		System.out.println("	Ryan's Power & Light");
 		System.out.println("	   Billing Statement");
 		System.out.println("	   ");
 		System.out.println("Today's Date: " + sdf.format(now));
