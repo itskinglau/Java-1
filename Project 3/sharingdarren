@@ -1,0 +1,222 @@
+			//RESTORE 2
+									else
+										if (input.equals("restore"))//restores from file
+										{
+											System.out.print("Enter file name to restore: ");
+											input = scan.nextLine();
+											
+											File file = new File("c:/Users/Dereck/Desktop/"+ input);
+											try (	FileReader reader = new FileReader(file);
+													BufferedReader buffer = new BufferedReader(reader);)
+											{			
+												
+												map.clear();
+												backpack.clear();
+												String line = buffer.readLine();
+												while (line != null)
+												{
+													String[] data = new String[4];
+													data[1] = null;
+													data[2] = null;
+													data[3] = null;
+													data = line.split(",");
+													String key = data[0];
+													if (key.equals("StartLocation"))//restores starting location
+													{
+														row = Integer.parseInt(data[1]);
+														col = Integer.parseInt(data[2]);
+													}
+													else
+													if (key.equals("Artifact")) //restores all artifacts
+													{
+														String name = data[1];
+														int artifactRow = Integer.parseInt(data[2]);
+														int artifactCol = Integer.parseInt(data[3]);
+														map.setArtifact(name, artifactRow, artifactCol);
+													}
+													if (key.equals("Inventory")) //restores the inventory.
+													{
+														for (int i = 1; i<data.length; i++)
+														{
+															String name = data[i];
+															backpack.setArtifact(map,name);
+														}
+												}
+													line = buffer.readLine();
+												}
+												System.out.println("Your progress has been restored.");
+												System.out.println("You are now in the "+map.rooms[row][col].name); 
+											}
+											catch (IOException e)
+											{
+												System.out.println("The file name you have entered was not found.");
+											}
+										}
+			//INVENTORY
+			else
+				if (input.equals("inventory"))
+				{
+					System.out.println(backpack.printInventory());
+				}
+			//SAVE
+			/*else
+			if (input.equals("save"))
+			{
+				System.out.println("Enter file name to save: ");
+				System.out.print("> ");
+				input = scan.nextLine();
+				try
+				{
+					File file = new File("c:/Users/Dereck/Desktop/"+ input);
+					boolean override = false;
+					if (file.exists())
+						{
+							System.out.println("File already exists. Overwrite? (Y/N): "); 
+							System.out.print("> ");
+							input = scan.nextLine();
+								//OVERWRITE FILE
+								if (input.equalsIgnoreCase("Y"))
+								{
+								override = true;
+								}
+								else
+								{
+									System.out.println("File was not saved.");
+								}
+						}
+							if (!file.exists() | override == true)//
+							{
+								FileWriter writer = new FileWriter(file);
+								BufferedWriter buffer = new BufferedWriter(writer);
+								PrintWriter pw = new PrintWriter(buffer);
+								//SAVE START LOCATION AND ARTIFACTS
+								pw.println("StartLocation" + "," + row + "," + col); */
+				else
+					if (input.equals("save")) //saves the file
+					{
+						System.out.print("Enter file name to save: ");
+						input = scan.nextLine();
+						
+						try
+						{
+							File file = new File("c:/Users/Dereck/Desktop/"+ input);
+							boolean override = false;
+							if (file.exists())
+								{
+									System.out.print("This file already exists do you want to override this file?(Y/Cancel): "); //prompts use to over ride
+									input = scan.nextLine();
+										if (input.equalsIgnoreCase("y"))
+										{
+										override = true;
+										}
+										else
+										{
+											System.out.println("File not saved.");
+									
+										}
+								}
+										
+										if (!file.exists() | override == true)//checks to see if its ok to override or if the file does not exist.
+										{
+											FileWriter writer = new FileWriter(file);
+											BufferedWriter buffer = new BufferedWriter(writer);
+											PrintWriter pw = new PrintWriter(buffer);
+									
+											pw.println("StartLocation" + "," + row + "," + col); //saves starting location
+											
+											
+										
+										
+								//SAVE ARTIFACTS
+								for (int in = 0; in < map.rooms[0][0].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[0][0].contentList.get(in).name + ",0,0");	
+								}
+								for (int in = 0; in < map.rooms[0][1].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[0][1].contentList.get(in).name + ",0,1");	
+								}
+								for (int in = 0; in < map.rooms[0][2].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[0][2].contentList.get(in).name + ",0,2");	
+								}
+								for (int in = 0; in < map.rooms[0][3].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[0][3].contentList.get(in).name + ",0,3");	
+								}
+								for (int in = 0; in < map.rooms[1][0].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[1][0].contentList.get(in).name + ",1,0");	
+								}
+								for (int in = 0; in < map.rooms[1][1].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[1][1].contentList.get(in).name + ",1,1");	
+								}
+								for (int in = 0; in < map.rooms[1][2].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[1][2].contentList.get(in).name + ",1,2");	
+								}
+								for (int in = 0; in < map.rooms[1][3].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[1][3].contentList.get(in).name + ",1,3");	
+								}
+								for (int in = 0; in < map.rooms[2][0].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[2][0].contentList.get(in).name + ",2,0");	
+								}
+								for (int in = 0; in < map.rooms[2][1].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[2][1].contentList.get(in).name + ",2,1");	
+								}
+								for (int in = 0; in < map.rooms[2][2].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[2][2].contentList.get(in).name + ",2,2");	
+								}
+								for (int in = 0; in < map.rooms[2][3].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[2][3].contentList.get(in).name + ",2,3");	
+								}
+								for (int in = 0; in < map.rooms[3][0].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[3][0].contentList.get(in).name + ",3,0");	
+								}
+								for (int in = 0; in < map.rooms[3][1].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[3][1].contentList.get(in).name + ",3,1");	
+								}
+								for (int in = 0; in < map.rooms[3][2].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[3][2].contentList.get(in).name + ",3,2");	
+								}
+								for (int in = 0; in < map.rooms[3][3].contentList.size(); in++)
+								{
+									pw.println("Artifact" + "," + map.rooms[3][3].contentList.get(in).name + ",3,3");	
+								}
+								
+								if (backpack.count() > 0) //saves the inventory.
+								{
+									pw.print("Inventory");
+									int i = 0;
+									while  (i<backpack.count())
+									{
+									pw.print("," + backpack.getArtifact(i).name);
+									i++;
+									}
+								}
+								
+								buffer.close();
+								pw.close();
+								System.out.println("Your progress has been saved.");
+
+							}
+														
+					
+				
+			
+			}
+			catch (IOException e)
+			{
+				System.out.println(e.getMessage());
+
+			}
+		}
